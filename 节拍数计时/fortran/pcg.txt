@@ -1,0 +1,27 @@
+  export OMP_PROC_BIND=spread
+  export OMP_DYNAMIC=true
+use omp_lib
+
+   integer(8) :: t1,t2,t3,t4,t5,t6,t7,t8,t9,rate,time,thread
+t1=0
+t2=0
+t3=0
+t4=0
+t5=0
+t6=0
+t7=0
+t8=0
+t9=0
+!-----------------------------------------------------------------------
+!
+!    thread lee
+!
+!-----------------------------------------------------------------------
+
+if (my_task < 3) then
+        call omp_set_num_threads(2)
+else
+        call omp_set_num_threads(1)
+endif
+
+   call c_rpcc(t9)

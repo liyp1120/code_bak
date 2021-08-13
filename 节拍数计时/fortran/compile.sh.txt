@@ -1,0 +1,43 @@
+#!/bin/bash
+
+MY_HOME=`pwd`
+
+NETCDF="${MY_HOME}/netcdf"
+NETCDFINC=${NETCDF}/include
+NETCDFLIB=${NETCDF}/lib
+cd ./build
+#rm -f *
+ls|grep -v "rpcc.s"|xargs rm -rf
+ln -sf ../source/* .
+
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S netcdf_mod.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S kinds_mod.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S domain_size.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S constants.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S communicate.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S exit_mod.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S blocks.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S broadcast.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S distribution.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S io_types.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S boundary.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S domain.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S gather_scatter.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S io_netcdf.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S io_binary.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S io.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S global_reductions.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S grid.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S prognostic.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S time_management.f90
+mpiifort -qopt-zmm-usage=high -fno-fnalias -qopt-report-phase=vec   -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S solver_pcg_mod.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S timers.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S initial.f90
+mpiifort -qopt-zmm-usage=high -mcmodel=medium -qopenmp -I${NETCDFINC} -I. -O3 -xCORE-AVX512 -fp-model source -assume byterecl -ftz  -free -g -S pcg.f90
+
+# pop_9-off                                                                                                                                                                
+
+mpiifort -qopt-zmm-usage=high -o pcg.x -mcmodel=medium -qopenmp  blocks.s netcdf_mod.s constants.s distribution.s domain.s exit_mod.s grid.s initial.s io_binary.s io.s io_netcdf.s io_types.s kinds_mod.s pcg.s prognostic.s solver_pcg_mod.s domain_size.s boundary.s  broadcast.s communicate.s gather_scatter.s global_reductions.s time_management.s timers.s rpcc.s  -L${NETCDFLIB} -lnetcdf
+                                                                                                                                                                                                                                                                                                                   
+mv pcg.x ../benchmark             
+

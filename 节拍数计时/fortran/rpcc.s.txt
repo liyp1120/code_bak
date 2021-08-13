@@ -1,0 +1,69 @@
+# mark_description "-S";
+        .file "rpcc.c"
+        .text
+..TXTST0:
+.L_2__routine_start_rpcc_0:
+# -- Begin  rpcc
+        .text
+# mark_begin;
+       .align    16,0x90
+        .globl rpcc
+# --- rpcc()
+rpcc:
+..B1.1:                         # Preds ..B1.0
+                                # Execution count [1.00e+00]
+        .cfi_startproc
+..___tag_value_rpcc.1:
+..L2:
+                                                          #3.1
+        rdtsc                                                   #6.0
+        movl      %edx, %edx                                    #7.56
+        movl      %eax, %eax                                    #7.30
+        shlq      $32, %rdx                                     #7.61
+        orq       %rdx, %rax                                    #7.61
+        ret                                                     #9.16
+        .align    16,0x90
+                                # LOE
+        .cfi_endproc
+# mark_end;
+        .type   rpcc,@function
+        .size   rpcc,.-rpcc
+..LNrpcc.0:                                                                                                                                                                                         37,1          38%
+        .data
+# -- End  rpcc
+        .text
+.L_2__routine_start_c_rpcc__1:
+# -- Begin  c_rpcc_
+        .text
+# mark_begin;
+       .align    16,0x90
+        .globl c_rpcc_
+# --- c_rpcc_(long *)
+c_rpcc_:
+# parameter 1: %rdi
+..B2.1:                         # Preds ..B2.0
+                                # Execution count [1.00e+00]
+        .cfi_startproc
+..___tag_value_c_rpcc_.4:
+..L5:
+                                                          #5.1
+        rdtsc                                                   #6.6
+        movl      %edx, %edx                                    #6.6
+        movl      %eax, %eax                                    #6.6
+        shlq      $32, %rdx                                     #6.6
+        orq       %rdx, %rax                                    #6.6
+        movq      %rax, (%rdi)                                  #6.3
+        ret                                                     #7.1
+        .align    16,0x90
+                                # LOE
+        .cfi_endproc
+# mark_end;
+        .type   c_rpcc_,@function
+        .size   c_rpcc_,.-c_rpcc_
+..LNc_rpcc_.1:
+        .data
+# -- End  c_rpcc_
+        .data
+        .section .note.GNU-stack, ""
+# End
+
