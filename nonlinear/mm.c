@@ -1,3 +1,4 @@
+// gcc -fopenmp mm.c
 #include<stdio.h>
 #include<stdlib.h>
 #include<malloc.h>
@@ -5,7 +6,7 @@
 #define row 2500
 #define col 2500
 int main() {
-	
+
 	int i,j,k;
 	double wtime;
 	int **a=NULL,**b=NULL,**c=NULL;
